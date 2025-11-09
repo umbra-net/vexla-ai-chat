@@ -7,10 +7,11 @@
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-// ClickHouse 配置（从环境变量读取）
-const QUERIES_API_URL = process.env.CLICKHOUSE_QUERIES_API;
-const KEY_ID = process.env.CLICKHOUSE_KEY_ID;
-const KEY_SECRET = process.env.CLICKHOUSE_KEY_SECRET;
+// ClickHouse 配置（环境变量或 fallback）
+const QUERIES_API_URL = process.env.CLICKHOUSE_QUERIES_API ||
+  'https://queries.clickhouse.cloud/service/3c84c16a-2e8f-4331-b21b-d087a246d77d/run';
+const KEY_ID = process.env.CLICKHOUSE_KEY_ID || 'l4DEcRSjinOuGPCbmlD9';
+const KEY_SECRET = process.env.CLICKHOUSE_KEY_SECRET || '4b1d2XMgr2HqLXN8GKeAWEK2hhaKmibPjleBZmP2vm';
 
 /**
  * 允许的 SQL 操作（白名单）

@@ -6,9 +6,11 @@
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-const QUERIES_API_URL = process.env.CLICKHOUSE_QUERIES_API;
-const KEY_ID = process.env.CLICKHOUSE_KEY_ID;
-const KEY_SECRET = process.env.CLICKHOUSE_KEY_SECRET;
+// 环境变量或 fallback 凭证
+const QUERIES_API_URL = process.env.CLICKHOUSE_QUERIES_API ||
+  'https://queries.clickhouse.cloud/service/3c84c16a-2e8f-4331-b21b-d087a246d77d/run';
+const KEY_ID = process.env.CLICKHOUSE_KEY_ID || 'l4DEcRSjinOuGPCbmlD9';
+const KEY_SECRET = process.env.CLICKHOUSE_KEY_SECRET || '4b1d2XMgr2HqLXN8GKeAWEK2hhaKmibPjleBZmP2vm';
 
 export default async function handler(
   req: VercelRequest,
