@@ -49,7 +49,15 @@ export default async function handler(
     }
 
     const text = await response.text();
-    const result = JSON.parse(text.split('\n')[0]);
+    const lines = text.split('\n');
+    const firstLine = lines[0];
+    if (!firstLine) {
+      return res.status(200).json({
+        connected: false,
+        error: 'Empty response from ClickHouse',
+      });
+    }
+    const result = JSON.parse(firstLine);
 
     if (result.result === 1) {
       return res.status(200).json({
